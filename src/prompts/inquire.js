@@ -114,8 +114,6 @@ const addEmployeePrompts = (roles, employees) => [
 
 const updateEmployeeRolePrompts = (employees, roles) => [
     // Create update employee role prompts array
-    // - Should ask to select employee from list
-    // - Should ask to select new role from list
     {
         type: 'list',
         name: 'employeeId',
@@ -123,6 +121,15 @@ const updateEmployeeRolePrompts = (employees, roles) => [
         choices: employees.map(employee => ({
             name: `${employee.first_name} ${employee.last_name}`,
             value: employee.id
+        }))
+    },
+    {
+        type: 'list',
+        name: 'roleId',
+        message: 'Select the new role for this employee:', // Should ask to select new role from list
+        choices: roles.map(role => ({
+            name: role.title,
+            value: role.id
         }))
     }
 ];
