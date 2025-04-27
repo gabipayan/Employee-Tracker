@@ -17,7 +17,7 @@ const mainMenuPrompt = {
 };
 
 const addDepartmentPrompt = {
-    // TODO: Create add department prompt object
+    // Create add department prompt object
     // - Should ask for department name
     // - Should validate that department name is not empty
     type: 'input',
