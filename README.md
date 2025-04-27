@@ -10,6 +10,7 @@ This employee tracker application is a command-line application designed to mana
 	•	Add a role
 	•	Add an employee
 	•	Update an employee’s role
+[Walkthrough video of the employee tracker](https://www.loom.com/share/4c20872ce3c24b2e840f0eadcb6803ce?sid=ef664213-1024-4d93-9b81-90dda659c5c0) 
 
 ## Table of Contents
 - [Description](#description)
