@@ -3,9 +3,14 @@ const pool = require('../db/connection');
 const roleQueries = {
     getAllRoles: async () => {
         const query = `
-            SELECT r.id, r.title, r.salary, d.name as department
-            FROM role r
-            JOIN department d ON r.department_id = d.id
+            SELECT 
+                r.id, 
+                r.title, 
+                r.salary, 
+                r.department_id,
+                d.name as department_name
+            FROM roles r
+            JOIN departments d ON r.department_id = d.id
             ORDER BY r.id
         `;
         const result = await pool.query(query);
@@ -14,7 +19,7 @@ const roleQueries = {
 
     addRole: async (title, salary, departmentId) => {
         const query = `
-            INSERT INTO role (title, salary, department_id)
+            INSERT INTO roles (title, salary, department_id)
             VALUES ($1, $2, $3)
             RETURNING *
         `;
@@ -23,4 +28,4 @@ const roleQueries = {
     }
 };
 
-module.exports = roleQueries; 
+module.exports = roleQueries;

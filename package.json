@@ -1,15 +1,20 @@
 {
   "name": "employee-tracker",
   "version": "1.0.0",
-  "description": "A command-line application to manage a company's employee database",
-  "main": "src/index.js",
+  "description": "## Your Task",
+  "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "db:setup": "dropdb --if-exists employee_tracker && createdb employee_tracker && psql -d employee_tracker -f src/db/schema.sql && psql -d employee_tracker -f src/db/seeds.sql",
+    "db:test": "psql -d employee_tracker -c '\\dt' && echo '\nTable Contents:' && psql -d employee_tracker -c 'SELECT * FROM departments; SELECT * FROM roles; SELECT * FROM employees;'"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "console.table": "^0.10.0",
-    "inquirer": "^8.2.4",
-    "pg": "^8.11.3"
+    "console": "^0.7.2",
+    "dotenv": "^16.5.0",
+    "inquirer": "8.2.4",
+    "pg": "^8.15.5"
   }
 }

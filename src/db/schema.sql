@@ -1,31 +1,42 @@
--- schema.sql
+-- TODO: Create a database named employee_tracker if it doesn't exist
+DROP DATABASE IF EXISTS employee_tracker;
+CREATE DATABASE employee_tracker;
 
--- Eliminar tablas si existen
-DROP TABLE IF EXISTS employee CASCADE;
-DROP TABLE IF EXISTS role CASCADE;
-DROP TABLE IF EXISTS department CASCADE;
+-- TODO: Drop existing tables in correct order (consider foreign key constraints)
+DROP TABLE IF EXISTS employees;
+DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS departments;
 
--- Crear tabla department
-CREATE TABLE department (
+-- TODO: Create department table with:
+--   - id (SERIAL PRIMARY KEY)
+--   - name (VARCHAR(30), UNIQUE, NOT NULL)
+CREATE TABLE departments (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) UNIQUE NOT NULL
+    name VARCHAR(30) UNIQUE NOT NULL
 );
 
--- Crear tabla role
-CREATE TABLE role (
+-- TODO: Create role table with:
+--   - id (SERIAL PRIMARY KEY)
+--   - title (VARCHAR(30), UNIQUE, NOT NULL)
+--   - salary (DECIMAL, NOT NULL)
+--   - department_id (INTEGER, NOT NULL, FOREIGN KEY)
+CREATE TABLE roles (
     id SERIAL PRIMARY KEY,
-    title VARCHAR(100) UNIQUE NOT NULL,
-    salary DECIMAL(10, 2) NOT NULL,
-    department_id INTEGER NOT NULL REFERENCES department(id) ON DELETE CASCADE
-);
+    title VARCHAR(30) UNIQUE NOT NULL,
+    salary DECIMAL NOT NULL,
+    department_id INTEGER NOT NULL REFERENCES departments(id)
+);  
 
--- Crear tabla employee
-CREATE TABLE employee (
+-- TODO: Create employee table with:
+--   - id (SERIAL PRIMARY KEY)
+--   - first_name (VARCHAR(30), NOT NULL)
+--   - last_name (VARCHAR(30), NOT NULL)
+--   - role_id (INTEGER, NOT NULL, FOREIGN KEY)
+--   - manager_id (INTEGER, FOREIGN KEY, can be NULL)
+CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
-    first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
-    role_id INTEGER NOT NULL REFERENCES role(id) ON DELETE SET NULL,
-    manager_id INTEGER REFERENCES employee(id) ON DELETE SET NULL,
-    FOREIGN KEY (role_id) REFERENCES role(id),
-    FOREIGN KEY (manager_id) REFERENCES employee(id)
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    role_id INTEGER NOT NULL REFERENCES roles(id),
+    manager_id INTEGER REFERENCES employees(id)
 );
